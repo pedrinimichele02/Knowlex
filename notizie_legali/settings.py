@@ -23,9 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qn_i1wel00u8(qqiba_s5ffz*yn%iox^a(0$1g$^)7k=@=i%ud'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']  # Allow all hosts for testing - change in production
+ALLOWED_HOSTS = ["lexlegis.blog", "www.lexlegis.blog"]  # Allow all hosts for testing - change in production
+
+CSRF_TRUSTED_ORIGINS = ["https://lexlegis.blog", "https://www.lexlegis.blog"]
+
+STATIC_URL  = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL   = "/media/"
+MEDIA_ROOT  = BASE_DIR / "media"
 
 
 # Application definition
