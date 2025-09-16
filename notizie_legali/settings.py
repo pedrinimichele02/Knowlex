@@ -88,7 +88,7 @@ DATABASES = {
     "NAME": "knowlex_DB",
     "USER": "admin",
     "PASSWORD": "PaoloLex16!",
-    "HOST": "127.0.0.1",
+    "HOST": "31.97.126.128",
     "PORT": "3306",
   }
 }
