@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'notizie_legali.wsgi.application'
 DATABASES = {
   "default": {
     "ENGINE": "django.db.backends.mysql",
-    "NAME": "mio_db",
-    "USER": "mio_user",
-    "PASSWORD": "PASSWORD_FORTE",
+    "NAME": "knowlex_DB",
+    "USER": "admin",
+    "PASSWORD": "PaoloLex16!",
     "HOST": "127.0.0.1",
     "PORT": "3306",
   }
