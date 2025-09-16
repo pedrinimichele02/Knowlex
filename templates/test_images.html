@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Test</title>
+    <style>
+        .test-image { 
+            max-width: 300px; 
+            border: 2px solid red;
+            margin: 10px;
+        }
+        .image-info {
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+    
+    {% for article in articles %}
+    <div class="image-info">
+        <h3>{{ article.title }}</h3>
+        <p><strong>Image Path:</strong> {{ article.image }}</p>
+        <p><strong>Image URL:</strong> {{ article.image.url }}</p>
+        <p><strong>Full URL:</strong> http://127.0.0.1:8000{{ article.image.url }}</p>
+        
+        <img src="{{ article.image.url }}" 
+             alt="{{ article.title }}" 
+             class="test-image"
+             onload="console.log('✅ Image loaded:', this.src)"
+             onerror="console.log('❌ Image failed:', this.src)">
+    </div>
+    {% endfor %}
+</body>
+</html>

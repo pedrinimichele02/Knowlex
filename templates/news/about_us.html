@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+
+{% block title %}Chi Siamo - KnowLex{% endblock %}
+
+{% block description %}{% if about %}{{ about.content|truncatechars:160 }}{% else %}Scopri di più su KnowLex e la nostra missione nel mondo legale{% endif %}{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'news:home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chi Siamo</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    {% if about %}
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6">
+        <h1 class="display-4 fw-bold mb-4 theme-aware-text">{{ about.title }}</h1>
+        <div class="about-content theme-aware-text">
+          {{ about.content|linebreaks }}
+        </div>
+      </div>
+      <div class="col-lg-6">
+        {% if about.image %}
+        <div class="about-image">
+          <img src="{{ about.image.url }}" alt="{{ about.title }}" class="img-fluid rounded shadow-lg">
+        </div>
+        {% else %}
+        <div class="placeholder-image-large d-flex align-items-center justify-content-center rounded shadow-lg">
+          <i class="fas fa-info-circle fa-4x text-primary opacity-75"></i>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if about.mission or about.vision %}
+    <div class="row g-4">
+      {% if about.mission %}
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0 theme-aware-card">
+          <div class="card-body theme-aware-card-body">
+            <div class="text-center mb-3">
+              <i class="fas fa-bullseye fa-3x text-primary"></i>
+            </div>
+            <h3 class="card-title text-center mb-3 theme-aware-text">La Nostra Missione</h3>
+            <p class="card-text theme-aware-text">{{ about.mission|linebreaks }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if about.vision %}
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0 theme-aware-card">
+          <div class="card-body theme-aware-card-body">
+            <div class="text-center mb-3">
+              <i class="fas fa-eye fa-3x text-success"></i>
+            </div>
+            <h3 class="card-title text-center mb-3 theme-aware-text">La Nostra Visione</h3>
+            <p class="card-text theme-aware-text">{{ about.vision|linebreaks }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <!-- Empty state when no About Us content is available -->
+    <div class="row">
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-info-circle fa-4x text-tertiary mb-4"></i>
+        <h1 class="display-4 fw-bold mb-3 theme-aware-text">Chi Siamo</h1>
+        <p class="lead theme-aware-text mb-4">
+          Le informazioni su di noi saranno disponibili presto.<br>
+          Il contenuto di questa sezione può essere gestito tramite il pannello amministrativo.
+        </p>
+        <div class="row mt-5">
+          <div class="col-md-6 mx-auto">
+            <div class="card shadow-sm border-0 theme-aware-card">
+              <div class="card-body text-center theme-aware-card-body">
+                <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                <h4 class="card-title theme-aware-text">Area Amministrativa</h4>
+                <p class="card-text theme-aware-text">
+                  Gli amministratori possono aggiungere contenuti dalla sezione "Chi Siamo" del pannello admin.
+                </p>
+                <a href="/admin/" target="_blank" class="btn btn-primary">
+                  <i class="fas fa-user-shield me-2"></i>Vai al Pannello Admin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-5 cta-section theme-aware-cta">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12">
+        <h2 class="fw-bold mb-3 cta-title">Esplora i Nostri Contenuti</h2>
+        <p class="lead mb-4 cta-text">Scopri gli articoli e gli approfondimenti legali del nostro team</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="{% url 'news:article_list' %}" class="btn cta-btn-primary btn-lg">
+            <i class="fas fa-newspaper me-2"></i>Tutti gli Articoli
+          </a>
+          <a href="{% url 'news:team' %}" class="btn cta-btn-secondary btn-lg">
+            <i class="fas fa-users me-2"></i>Conosci il Team
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.placeholder-image-large {
+  height: 300px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border: 2px dashed var(--border-primary);
+}
+
+.about-image img {
+  max-height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.about-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Theme-aware text for better contrast */
+.about-content.theme-aware-text {
+  color: var(--text-primary) !important;
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .placeholder-image-large {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border-color: var(--border-primary);
+}
+
+/* Theme-aware Call to Action section */
+.theme-aware-cta {
+  background: var(--primary-gradient);
+  color: var(--text-light);
+}
+
+.cta-title {
+  color: var(--text-light) !important;
+}
+
+.cta-text {
+  color: var(--text-light) !important;
+  opacity: 0.95;
+}
+
+.cta-btn-primary {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  border: none;
+  font-weight: 600;
+}
+
+.cta-btn-primary:hover {
+  background-color: var(--bg-secondary);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.cta-btn-secondary {
+  background-color: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--text-light);
+  font-weight: 600;
+}
+
+.cta-btn-secondary:hover {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* Dark theme CTA adjustments */
+[data-theme="dark"] .theme-aware-cta {
+  background: var(--primary-gradient);
+}
+
+[data-theme="dark"] .cta-title,
+[data-theme="dark"] .cta-text {
+  color: var(--text-light) !important;
+}
+
+[data-theme="dark"] .cta-btn-primary {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .cta-btn-secondary {
+  border-color: var(--text-light);
+  color: var(--text-light);
+}
+
+/* Enhanced contrast for admin area text */
+.card-body .card-text.theme-aware-text {
+  color: var(--text-primary) !important;
+  opacity: 1;
+}
+
+.card-body .card-title.theme-aware-text {
+  color: var(--text-primary) !important;
+}
+
+/* Ensure proper contrast in both themes */
+.theme-aware-card .theme-aware-card-body .theme-aware-text {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .theme-aware-card .theme-aware-card-body .theme-aware-text {
+  color: var(--text-primary) !important;
+}
+
+/* Extra specificity for admin area description text */
+.card .card-body p.card-text.theme-aware-text {
+  color: var(--text-primary) !important;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .card .card-body p.card-text.theme-aware-text {
+  color: var(--text-primary) !important;
+}
+
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .about-image {
+    margin-top: 2rem;
+  }
+  
+  .placeholder-image-large {
+    height: 200px;
+  }
+  
+  .about-image img {
+    max-height: 250px;
+  }
+}
+</style>
+{% endblock %}

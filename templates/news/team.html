@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block title %}Team - KnowLex{% endblock %}
+
+{% block description %}Conosci il team di KnowLex: professionisti esperti nel settore legale{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'news:home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Team</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold mb-3">Il Nostro Team</h1>
+        <p class="lead text-tertiary">Professionisti esperti al servizio dell'informazione legale</p>
+      </div>
+    </div>
+
+    {% if team_members %}
+    <div class="row g-4">
+      {% for member in team_members %}
+      <div class="col-lg-4 col-md-6">
+        <div class="card team-card h-100 shadow-sm border-0">
+          <div class="card-body text-center">
+            <div class="team-image-container mb-3">
+              {% if member.image %}
+              <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-image rounded-circle">
+              {% else %}
+              <div class="team-image-placeholder rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fas fa-user fa-3x text-tertiary"></i>
+              </div>
+              {% endif %}
+            </div>
+            
+            <h4 class="card-title mb-2">{{ member.name }}</h4>
+            <p class="text-primary fw-semibold mb-3">{{ member.get_role_display_name }}</p>
+            
+            <div class="team-bio text-tertiary mb-3">
+              {{ member.bio|linebreaks }}
+            </div>
+            
+            {% if member.email or member.linkedin_url %}
+            <div class="team-contact">
+              {% if member.email %}
+              <a href="mailto:{{ member.email }}" class="btn btn-outline-primary btn-sm me-2" title="Email {{ member.name }}">
+                <i class="fas fa-envelope"></i>
+              </a>
+              {% endif %}
+              {% if member.linkedin_url %}
+              <a href="{{ member.linkedin_url }}" target="_blank" class="btn btn-outline-primary btn-sm" title="LinkedIn di {{ member.name }}">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Empty state when no team members are available -->
+    <div class="row">
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-users fa-4x text-tertiary mb-4"></i>
+        <h2 class="fw-bold mb-3">Team in Costruzione</h2>
+        <p class="lead text-tertiary mb-4">
+          Stiamo preparando le informazioni sui membri del nostro team.<br>
+          Il contenuto di questa sezione può essere gestito tramite il pannello amministrativo.
+        </p>
+        <div class="row mt-5">
+          <div class="col-md-6 mx-auto">
+            <div class="card shadow-sm border-0">
+              <div class="card-body text-center">
+                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                <h4 class="card-title">Aggiungi Membri del Team</h4>
+                <p class="card-text text-tertiary">
+                  Gli amministratori possono aggiungere i membri del team dalla sezione "Membri del Team" del pannello admin.
+                </p>
+                <a href="/admin/" target="_blank" class="btn btn-primary">
+                  <i class="fas fa-user-shield me-2"></i>Vai al Pannello Admin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Join Us Section -->
+{% if team_members %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2 class="fw-bold mb-3">Vuoi Unirti al Nostro Team?</h2>
+        <p class="lead text-tertiary mb-4">
+          Siamo sempre alla ricerca di professionisti talentuosi e appassionati del diritto.
+          Se condividi la nostra visione, contattaci!
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="{% url 'news:about_us' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-info-circle me-2"></i>Scopri di Più
+          </a>
+          <a href="{% url 'news:article_list' %}" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-newspaper me-2"></i>Leggi i Nostri Articoli
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<style>
+.team-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.team-image-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.team-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.team-image-placeholder {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 4px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-card:hover .team-image {
+  transform: scale(1.05);
+}
+
+.team-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-height: 120px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.team-contact .btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.team-contact .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .team-image-container,
+  .team-image,
+  .team-image-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .team-bio {
+    max-height: 100px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .team-card {
+    margin-bottom: 1rem;
+  }
+  
+  .btn-lg {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+</style>
+{% endblock %}

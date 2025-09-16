@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} - KnowLex{% endblock %}
+
+{% block description %}{{ article.summary }}{% endblock %}
+
+{% block content %}
+<article class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <header class="mb-4">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'news:home' %}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'news:category_articles' article.category %}">{{ article.get_category_display_name }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ article.title|truncatechars:50 }}</li>
+            </ol>
+          </nav>
+          
+          <span class="badge bg-primary mb-3">{{ article.get_category_display_name }}</span>
+          <h1 class="display-5 fw-bold mb-3">{{ article.title }}</h1>
+          <p class="lead text-secondary mb-4">{{ article.summary }}</p>
+          
+          <div class="d-flex align-items-center text-tertiary mb-4">
+            <i class="fas fa-user me-2"></i>
+            <span class="me-4">{{ article.author.get_full_name|default:article.author.username }}</span>
+            <i class="fas fa-calendar me-2"></i>
+            <span class="me-4">{{ article.created_at|date:"d F Y" }}</span>
+            {% if article.updated_at != article.created_at %}
+            <i class="fas fa-edit me-2"></i>
+            <span>Aggiornato il {{ article.updated_at|date:"d F Y" }}</span>
+            {% endif %}
+          </div>
+        </header>
+        
+        {% if article.image %}
+        <div class="article-image mb-4">
+          <img src="{{ article.image.url }}" alt="{{ article.title }}" class="img-fluid rounded shadow-sm">
+        </div>
+        {% endif %}
+        
+        <div class="article-content text-primary">
+          {{ article.content|linebreaks }}
+        </div>
+        
+        {% if article.gallery_images.all %}
+        <div class="image-gallery mt-4">
+          <h4 class="mb-3">Galleria Immagini</h4>
+          <div class="row g-3">
+            {% for gallery_image in article.gallery_images.all %}
+            <div class="col-md-6 col-lg-4">
+              <div class="gallery-item">
+                <img src="{{ gallery_image.image.url }}" alt="{{ gallery_image.caption|default:article.title }}" 
+                     class="img-fluid rounded shadow-sm gallery-thumb" 
+                     data-bs-toggle="modal" data-bs-target="#imageModal" 
+                     data-bs-src="{{ gallery_image.image.url }}" 
+                     data-bs-caption="{{ gallery_image.caption }}">
+                {% if gallery_image.caption %}
+                <p class="text-tertiary small mt-2 mb-0">{{ gallery_image.caption }}</p>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        
+      </div>
+      
+      <div class="col-lg-4">
+        <aside class="sidebar">
+          {% if related_articles %}
+          <div class="card mb-4 theme-aware-card">
+            <div class="card-header theme-aware-card-header">
+              <h5 class="card-title mb-0 theme-aware-text">Articoli Correlati</h5>
+            </div>
+            <div class="card-body theme-aware-card-body">
+              {% for related_article in related_articles %}
+              <div class="d-flex mb-3">
+                <div class="flex-shrink-0">
+                  <span class="badge bg-secondary">{{ related_article.get_category_display_name }}</span>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-1">
+                    <a href="{{ related_article.get_absolute_url }}" class="text-decoration-none theme-aware-link">{{ related_article.title }}</a>
+                  </h6>
+                  <small class="text-tertiary">{{ related_article.created_at|date:"d M Y" }}</small>
+                </div>
+              </div>
+              {% if not forloop.last %}<hr class="theme-aware-border">{% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+          
+        </aside>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content theme-aware-card">
+      <div class="modal-header theme-aware-card-header">
+        <h5 class="modal-title theme-aware-text" id="imageModalLabel">Immagine</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center theme-aware-card-body">
+        <img src="" class="img-fluid" id="modalImage" alt="">
+        <p class="text-tertiary mt-2" id="modalCaption"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Image gallery modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalCaption = document.getElementById('modalCaption');
+  
+  imageModal.addEventListener('show.bs.modal', function(event) {
+    const trigger = event.relatedTarget;
+    const imageSrc = trigger.getAttribute('data-bs-src');
+    const imageCaption = trigger.getAttribute('data-bs-caption');
+    
+    modalImage.src = imageSrc;
+    modalImage.alt = imageCaption || '';
+    modalCaption.textContent = imageCaption || '';
+  });
+});
+</script>
+{% endblock %}

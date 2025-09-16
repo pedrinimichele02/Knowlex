@@ -1,0 +1,193 @@
+/* ========================================
+   HERO COLORS OVERRIDE - FORZA ASSOLUTA
+   File specifico per sistemare i colori dell'hero
+   ======================================== */
+
+/* REGOLE AGGRESSIVE UNIVERSALI - MOBILE BIANCO */
+@media (max-width: 768px) {
+  * .hero-main-title, * .hero-main-title *, * h1.hero-main-title, * h1.hero-main-title * {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  * .hero-subtitle, * .hero-subtitle *, * p.hero-subtitle, * p.hero-subtitle * {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  * .brand-highlight, * span.brand-highlight {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+  }
+}
+
+/* TESTO SEMPRE LEGGIBILE SU SFONDO SCURO */
+.hero-main-title,
+h1.hero-main-title,
+.clean-hero-section .hero-main-title,
+.clean-hero-section h1.hero-main-title,
+.clean-hero-section .hero-content-center .hero-main-title,
+.clean-hero-section .hero-content-center h1.hero-main-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  font-weight: 700 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.hero-subtitle,
+p.hero-subtitle,
+.clean-hero-section .hero-subtitle,
+.clean-hero-section p.hero-subtitle,
+.clean-hero-section .hero-content-center .hero-subtitle,
+.clean-hero-section .hero-content-center p.hero-subtitle {
+  color: #e2e8f0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+  font-weight: 500 !important;
+  font-family: 'Inter', sans-serif !important;
+  opacity: 0.95 !important;
+}
+
+.brand-highlight,
+span.brand-highlight,
+.clean-hero-section .brand-highlight,
+.clean-hero-section span.brand-highlight,
+.clean-hero-section .hero-content-center .brand-highlight,
+.clean-hero-section .hero-content-center span.brand-highlight {
+  color: #60a5fa !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #60a5fa !important;
+  background-clip: unset !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  font-weight: 800 !important;
+}
+
+/* Regole tema scuro rimosse - usiamo colori universalmente leggibili */
+
+[data-theme="dark"] .hero-subtitle,
+[data-theme="dark"] p.hero-subtitle,
+[data-theme="dark"] .clean-hero-section .hero-subtitle,
+[data-theme="dark"] .clean-hero-section p.hero-subtitle,
+[data-theme="dark"] .clean-hero-section .hero-content-center .hero-subtitle,
+[data-theme="dark"] .clean-hero-section .hero-content-center p.hero-subtitle {
+  color: #e2e8f0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  font-weight: 500 !important;
+  font-family: 'Inter', sans-serif !important;
+  opacity: 0.95 !important;
+}
+
+[data-theme="dark"] .brand-highlight,
+[data-theme="dark"] span.brand-highlight,
+[data-theme="dark"] .clean-hero-section .brand-highlight,
+[data-theme="dark"] .clean-hero-section span.brand-highlight,
+[data-theme="dark"] .clean-hero-section .hero-content-center .brand-highlight,
+[data-theme="dark"] .clean-hero-section .hero-content-center span.brand-highlight {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* REGOLE UNIVERSALI - DESIGN PULITO */
+* .hero-main-title {
+  color: #ffffff !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
+}
+
+* .hero-subtitle {
+  color: #f1f5f9 !important;
+  text-shadow: none !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+}
+
+* .brand-highlight {
+  color: #3b82f6 !important;
+  -webkit-text-fill-color: #3b82f6 !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+/* ========================================
+   REGOLE MOBILE SPECIFICHE - SOVRASCRIVONO SOLO MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* TUTTO BIANCO SU MOBILE - SOLUZIONE DEFINITIVA */
+  .clean-hero-section .hero-content-center h1,
+  .clean-hero-section .hero-content-center h1 *,
+  .hero-main-title,
+  .hero-main-title *,
+  h1.hero-main-title,
+  h1.hero-main-title * {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    font-weight: 700 !important;
+    background: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  .clean-hero-section .hero-content-center p,
+  .clean-hero-section .hero-content-center p *,
+  .hero-subtitle,
+  .hero-subtitle *,
+  p.hero-subtitle,
+  p.hero-subtitle * {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
+    background: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  .brand-highlight,
+  span.brand-highlight {
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background-clip: unset !important;
+    text-shadow: none !important;
+    font-weight: 700 !important;
+  }
+  
+  /* OVERRIDE ANCHE PER TEMA SCURO */
+  [data-theme="dark"] .clean-hero-section .hero-content-center h1,
+  [data-theme="dark"] .clean-hero-section .hero-content-center h1 *,
+  [data-theme="dark"] .hero-main-title,
+  [data-theme="dark"] .hero-main-title *,
+  [data-theme="dark"] h1.hero-main-title,
+  [data-theme="dark"] h1.hero-main-title * {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  [data-theme="dark"] .clean-hero-section .hero-content-center p,
+  [data-theme="dark"] .clean-hero-section .hero-content-center p *,
+  [data-theme="dark"] .hero-subtitle,
+  [data-theme="dark"] .hero-subtitle *,
+  [data-theme="dark"] p.hero-subtitle,
+  [data-theme="dark"] p.hero-subtitle * {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  [data-theme="dark"] .brand-highlight,
+  [data-theme="dark"] span.brand-highlight {
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: none !important;
+  }
+}

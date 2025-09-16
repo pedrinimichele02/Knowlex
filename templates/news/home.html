@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KnowLex - Your Legal Knowledge Hub{% endblock %}
+{% block og_title %}KnowLex - Your Legal Knowledge Hub{% endblock %}
+{% block twitter_title %}KnowLex - Your Legal Knowledge Hub{% endblock %}
+
+{% block content %}
+<!-- Enhanced Legal Hero Section -->
+<section class="clean-hero-section position-relative overflow-hidden">
+  <!-- Hero Background - ULTRA SEMPLIFICATO -->
+  <div class="hero-background-clean">
+    <!-- Solo un gradiente di sfondo, niente sovrapposizioni -->
+  </div>
+  
+  <div class="container position-relative" style="z-index: 10; background: transparent !important;">
+    <div class="row min-vh-100 align-items-center justify-content-center">
+      <div class="col-lg-8 col-xl-6" style="background: transparent !important;">
+        <div class="hero-content-center text-center" style="background: transparent !important; background-color: transparent !important; box-shadow: none !important; border: none !important; backdrop-filter: none !important;">
+          <h1 class="hero-main-title" style="color: #ffffff !important; font-weight: 700 !important; font-family: 'Montserrat', sans-serif !important; text-shadow: none !important;">
+            Benvenuto in <span class="brand-highlight" style="color: #ffffff !important; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #ffffff !important; text-shadow: none !important; font-weight: 700 !important;">KnowLex</span>
+          </h1>
+          
+          <p class="hero-subtitle" style="color: #ffffff !important; text-shadow: none !important; font-weight: 400 !important; font-family: 'Inter', sans-serif !important; opacity: 1 !important;">
+            Approfondisci argomenti di diritto civile, commerciale, penale e del lavoro.
+          </p>
+          
+          <div class="hero-cta">
+            <a href="{% url 'news:article_list' %}" class="btn-explore">
+              Esplora gli Articoli
+              <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Script per gestire i colori del tema dinamicamente -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎨 Script colori hero caricato');
+    
+    function updateHeroColors() {
+        // Rileva tema corrente (data-theme o system preference)
+        let isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        
+        // Se non c'è data-theme, usa la preferenza di sistema
+        if (!document.documentElement.getAttribute('data-theme')) {
+            isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        
+        console.log('🌙 Tema corrente:', isDark ? 'scuro' : 'chiaro', '- data-theme:', document.documentElement.getAttribute('data-theme'));
+        
+        const heroTitle = document.querySelector('.hero-main-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        const brandHighlight = document.querySelector('.brand-highlight');
+        
+        if (heroTitle) {
+            // Sempre bianco pulito sull'immagine di sfondo
+            heroTitle.style.color = '#ffffff';
+            heroTitle.style.textShadow = 'none';
+            heroTitle.style.fontWeight = '700';
+            console.log('✅ Titolo aggiornato:', heroTitle.style.color);
+        }
+        
+        if (heroSubtitle) {
+            // Sempre grigio chiaro pulito sull'immagine
+            heroSubtitle.style.color = '#f1f5f9';
+            heroSubtitle.style.textShadow = 'none';
+            heroSubtitle.style.fontWeight = '400';
+            heroSubtitle.style.opacity = '1';
+            console.log('✅ Sottotitolo aggiornato:', heroSubtitle.style.color);
+        }
+        
+        if (brandHighlight) {
+            // Sempre blu vibrante pulito per entrambi i temi
+            brandHighlight.style.color = '#3b82f6';
+            brandHighlight.style.background = 'none';
+            brandHighlight.style.webkitBackgroundClip = 'unset';
+            brandHighlight.style.webkitTextFillColor = '#3b82f6';
+            brandHighlight.style.backgroundClip = 'unset';
+            brandHighlight.style.textShadow = 'none';
+            brandHighlight.style.fontWeight = '900';
+            console.log('✅ Brand highlight aggiornato');
+        }
+    }
+    
+    // Aggiorna colori subito
+    updateHeroColors();
+    
+    // Ascolta i cambi di tema
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                console.log('🔄 Cambio tema rilevato!');
+                setTimeout(updateHeroColors, 100); // Piccolo delay per sicurezza
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
+    
+    // Backup: ascolta anche i click sui pulsanti del tema
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.theme-toggle-enhanced, .theme-toggle-mobile')) {
+            console.log('🔘 Click tema rilevato!');
+            setTimeout(updateHeroColors, 200);
+        }
+    });
+    
+    console.log('🎨 Script colori hero attivo!');
+});
+</script>
+
+<!-- Categories Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="fw-bold mb-3">Esplora per Categoria</h2>
+                <p class="text-tertiary">Trova gli articoli che ti interessano di più</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card category-card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-building fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Diritto Commerciale</h5>
+                        <p class="card-text text-tertiary">Normative su società, contratti commerciali e attività d'impresa</p>
+                        <a href="{% url 'news:category_articles' 'commerciale' %}" class="btn btn-primary">Esplora</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card category-card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Diritto Civile</h5>
+                        <p class="card-text text-tertiary">Contratti, proprietà, famiglia e diritti delle persone</p>
+                        <a href="{% url 'news:category_articles' 'privato' %}" class="btn btn-success">Esplora</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card category-card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-briefcase fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Diritto del Lavoro</h5>
+                        <p class="card-text text-tertiary">Rapporti di lavoro, sicurezza e previdenza sociale</p>
+                        <a href="{% url 'news:category_articles' 'lavoro' %}" class="btn btn-warning">Esplora</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card category-card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-gavel fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">Diritto Penale</h5>
+                        <p class="card-text text-tertiary">Diritto penale, procedura penale e giustizia criminale</p>
+                        <a href="{% url 'news:category_articles' 'penale' %}" class="btn btn-danger">Esplora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Articles -->
+{% if featured_articles %}
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col">
+                <h2 class="fw-bold mb-3">Articoli in Evidenza</h2>
+                <p class="text-tertiary">Le ultime pubblicazioni dal nostro team editoriale</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for article in featured_articles %}
+            <div class="col-lg-4 col-md-6">
+                <article class="card article-card h-100 shadow-sm">
+                    {% if article.image %}
+                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                    {% else %}
+                    <div class="card-img-top placeholder-image d-flex align-items-center justify-content-center">
+                        <i class="fas fa-newspaper fa-2x text-tertiary"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-primary">{{ article.get_category_display_name }}</span>
+                            <small class="text-tertiary">{{ article.created_at|date:"d M Y" }}</small>
+                        </div>
+                        <h5 class="card-title">
+                            <a href="{{ article.get_absolute_url }}" class="text-decoration-none">{{ article.title }}</a>
+                        </h5>
+                        <p class="card-text text-tertiary">{{ article.summary }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-tertiary">di {{ article.author.get_full_name|default:article.author.username }}</small>
+                            <a href="{{ article.get_absolute_url }}" class="btn btn-outline-primary btn-sm">Leggi tutto</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{% url 'news:article_list' %}" class="btn btn-primary btn-lg">Vedi tutti gli articoli</a>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <i class="fas fa-newspaper fa-4x text-tertiary mb-4"></i>
+                <h3 class="fw-bold mb-3">Benvenuto</h3>
+                <p class="text-tertiary mb-0">Non ci sono ancora articoli pubblicati. Torna più tardi o crea nuovi contenuti dal pannello admin.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

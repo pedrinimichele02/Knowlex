@@ -1,0 +1,13 @@
+Django==5.1.4
+django-admin-sortable2==2.1.10
+Pillow==10.4.0
+
+# Production dependencies
+psycopg2-binary==2.9.9
+redis==5.0.1
+gunicorn==21.2.0
+whitenoise==6.6.0
+
+# Optional: For better performance and monitoring
+django-extensions==3.2.3
+django-debug-toolbar==4.2.0  # Remove in production
